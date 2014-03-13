@@ -39,8 +39,13 @@
 */
 
 $route['default_controller'] = "main";
+$route['auth'] = "auth";
+$route['auth/(:any)'] = "auth/$1";
+$route['testcont'] = "testcont";
+$route['testcont/(:any)'] = "testcont/$1";
 $route['(:any)'] = "main/$1";
 $route['404_override'] = '';
+
 
 
 /* End of file routes.php */
