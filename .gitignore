@@ -1,0 +1,10 @@
+system/
+userguide/
+application/cache
+application/core
+application/errors
+application/helpers
+application/hooks
+application/logs
+application/third_party
+
