@@ -15,13 +15,13 @@ class Auth extends CI_Controller
 
 	public function index()
 	{
-		/*if ($message = $this->session->flashdata('message')) {
+		if ($message = $this->session->flashdata('message')) {
 			$this->load->view('auth/general_message', array('message' => $message));
 		} else {
 			redirect('/auth/login/');
-		}*/
-		echo "Tank auth login";
-		echo '<a href="login">Login</a>';
+		}
+		/*echo "Projects ";
+		echo '<a href="login">Login</a>';*/
 	}
 
 	/**

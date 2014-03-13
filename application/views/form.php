@@ -1,4 +1,4 @@
-<form>
+<form name="addnew" action="<?echo base_url();?>add_to_gal" method="post">
 <br>
 <label>Project name</label>
 <input type="text" name="project_name" size="50"/><br>
@@ -19,10 +19,10 @@
 <textarea rows="10" cols="50" name="project_desc"></textarea>
 <br>
 <label>Team Members</label><br>
-<input type="text" name="mem_name_1" size="50"/><br>
-<input type="text" name="mem_name_2" size="50"/><br>
-<input type="text" name="mem_name_3" size="50"/><br>
-<input type="text" name="mem_name_4" size="50"/><br>
+<input type="text" name="mem_1" size="50"/><br>
+<input type="text" name="mem_2" size="50"/><br>
+<input type="text" name="mem_3" size="50"/><br>
+<input type="text" name="mem_4" size="50"/><br>
 <label>Timeline</label><br>
 <input type="text" name="kickoff" size="50"/><br>
 <input type="text" name="phase1" size="50"/><br>
