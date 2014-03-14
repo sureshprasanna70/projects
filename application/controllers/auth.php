@@ -20,8 +20,7 @@ class Auth extends CI_Controller
 		} else {
 			redirect('/auth/login/');
 		}
-		/*echo "Projects ";
-		echo '<a href="login">Login</a>';*/
+		
 	}
 
 	/**
