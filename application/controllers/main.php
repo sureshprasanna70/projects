@@ -14,11 +14,32 @@ Class Main extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('template/top');
+		
+		$data['metas']="projects,k!projects,kurukshetra,k!";
+		$data['sendingmeta']=TRUE;
+		$data['ogtitle']="HOME|K!14 Projects";
+		$data['ogtype']="article";
+		$data['ogurl']="http://projects.kurukshetra.org.in";
+		$data['ogimg']=base_url()."assets/images/1.jpg";
+		$data['ogdesc']='The gallery of kurukshetra projects';
+		if($this->tank_auth->is_logged_in())
+		{
+			$data['username']=$this->tank_auth->get_username();
+		}
+		$this->load->view('template/top',$data);
+		$this->load->view('template/bottom');
+
+		/*
+		<meta property="og:title" content="Title Here" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.example.com/" />
+<meta property="og:image" content="http://example.com/image.jpg" />
+<meta property="og:description" content="Description Here" />
+		*/
 	}
 	public function contact()
 	{
-		echo "contact";
+		echo "contacts";
 	}
 	public function projects($year=2007,$id=NULL)
 	{
@@ -28,6 +49,7 @@ Class Main extends CI_Controller
 		$data['project']=$ans->result();
 		$this->load->view('template/top');
 		$this->load->view('fullview',$data);
+		$this->load->view('template/bottom');
 	}
 	public function show($id=NULL)
 	{
@@ -40,6 +62,7 @@ Class Main extends CI_Controller
 		$data['full']=$ans->result();
 		$this->load->view('template/top');
 		$this->load->view('details',$data);
+		$this->load->view('template/bottom');
 		}
 
 	}
@@ -103,6 +126,8 @@ Class Main extends CI_Controller
 			{
 				$this->load->view('template/top');
 				$this->load->view('form');
+				$this->load->view('template/bottom');
+
 			}
 		
 		/*
@@ -126,5 +151,83 @@ Class Main extends CI_Controller
             echo "<br>File path".$data['upload_data']['file_path'][];
 			echo $data['upload_data'];
 		}*/
+	}
+	public function change()
+	{
+		if($this->tank_auth->is_logged_in())
+			{
+				
+				$data['username']=$this->tank_auth->get_username();
+				$query="SELECT id,name from contents";
+				$ans=$this->db->query($query);
+				$data['linki']=$ans->result();
+				$this->load->view('template/top');
+				$this->load->view('step1',$data);
+				$this->load->view('template/bottom');
+
+			}
+	}
+	public function showeditor($id=NULL)
+	{
+		if($this->tank_auth->is_logged_in() && $id!=NULL)
+		{
+			
+				$query='SELECT * from contents where id='.$id.'';
+				echo $query;
+				$ans=$this->db->query($query);
+			$data['full']=$ans->result();
+			$this->load->view('template/top');
+			$this->load->view('step2',$data);
+			$this->load->view('template/bottom');
+
+		}
+		else
+		{
+			echo 'Operate using remote only';
+		}
+	}
+	public function edit()
+	{
+		$this->form_validation->set_rules('project_name','Project name','required');
+		$this->form_validation->set_rules('project_desc','Project Desc','required');
+		$this->form_validation->set_rules('year','Project name','required');
+		$this->form_validation->set_rules('tag','Tag line','required');
+		$this->form_validation->set_rules('mem_1','Member 1','required');
+		$this->form_validation->set_rules('kickoff','Kickoff','required');
+		$this->form_validation->set_rules('phase1','phase1','required');
+		$this->form_validation->set_rules('phase2','phase2','required');
+		$this->form_validation->set_rules('phase3','phase3','required');
+		$this->form_validation->set_rules('closing','Closing','required');
+		
+		if($this->form_validation->run())
+		{
+		$data['name']=$this->input->post('project_name');
+		$data['desc']=$this->input->post('project_desc');
+		$data['tag']=$this->input->post('tag');
+		$data['year']=$this->input->post('year');
+		$data['mem1']=$this->input->post('mem_1');
+		$data['mem2']=$this->input->post('mem_2');
+		$data['mem3']=$this->input->post('mem_3');
+		$data['mem4']=$this->input->post('mem_4');
+
+		$data['kickoff']=$this->input->post('kickoff');
+		$data['phase1']=$this->input->post('phase1');
+		$data['phase2']=$this->input->post('phase2');
+		$data['phase3']=$this->input->post('phase3');
+		$data['closing']=$this->input->post('closing');
+		if($this->db->update('contents',$data))
+			{
+				$tostring='projects/'.$data['year'];
+				echo $tostring;
+				redirect($tostring);
+			}
+		}
+		else
+			{
+				$this->load->view('template/top');
+				$this->load->view('form');
+				$this->load->view('template/bottom');
+
+			}
 	}
 }

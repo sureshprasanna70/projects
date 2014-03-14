@@ -5,6 +5,14 @@
   <head>
     <title>k! Projects</title>
     <meta name="viewport" content="width=device-width">
+    <?php if(isset($sendingmeta)){?>
+    <meta property="og:title" content="<?php echo $ogtitle;?>" />
+    <meta property="og:type" content="<?php echo $ogtype;?>" />
+    <meta property="og:url" content="<?php echo $ogurl;?>" />
+    <meta property="og:desc" content="<?php echo $ogdesc;?>" />
+	<meta property="og:image" content="<?php echo $ogimg;?>" />
+    <?}?>
+
     <link rel="stylesheet" href="https://djyhxgczejc94.cloudfront.net/frameworks/bootstrap/3.0.0/themes/white-plum/bootstrap.min.css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
@@ -47,15 +55,15 @@
                 <li>
                   <a href="<?echo base_url();?>projects/2010">2010</a>
                 </li>
-<li class="divider"></li>
+				<li class="divider"></li>
                 <li>
                   <a href="<?echo base_url();?>projects/2011">2011</a>
                 </li>
-<li class="divider"></li>
+				<li class="divider"></li>
                 <li>
                   <a href="<?echo base_url();?>projects/2012">2012</a>
                 </li>
-<li class="divider"></li>
+				<li class="divider"></li>
                 <li>
                   <a href="<?echo base_url();?>projects/2013">2013</a>
                 </li>
@@ -72,4 +80,6 @@
             </ul>
             </div>
         
-              </nav>
+    </nav>
+    <?php if(isset($username))?>
+    <h5 style="float:right">Welcome,<?echo $username;?></h5>
