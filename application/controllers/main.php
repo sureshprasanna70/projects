@@ -177,7 +177,7 @@ Class Main extends CI_Controller
 		}
 		else
 		{
-			echo 'Operate using remote only';
+			redirect('auth/login');
 		}
 	}
 	public function edit()
