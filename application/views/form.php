@@ -66,7 +66,7 @@
 </div>
 <div class="col-md-5">
 <input class="form-control input-md" type="text" placeholder="Kickoff" name="kickoff" size="50"/><br>
-<input class="form-control input-md" type="text" placeholder="Phase 1"name="phase1" size="50"/><br>
+<input class="form-control input-md" type="text" placeholder="Phase 1" name="phase1" size="50"/><br>
 <input class="form-control input-md" type="text" placeholder="Phase 2" name="phase2" size="50"/><br>
 <input class="form-control input-md" type="text" placeholder="Phase 3" name="phase3" size="50"/><br>
 <input class="form-control input-md" type="text" placeholder="Phase 4" name="closing" size="50"/><br>

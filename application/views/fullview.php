@@ -26,7 +26,7 @@ foreach ($project as $row) {
             <div class="col-lg-5 col-md-5">
                 <h3>'.$row->name.'</h3>
                 <h4>'.$row->tag.'</h4>
-                <p>'.substr($row->desc,0,100).'</p>
+                <p>'.substr($row->desc,0,20).'</p>
                 <a class="btn btn-primary" href="'.base_url().'show/'.$row->id.'">View Project>></a>
             </div>
 

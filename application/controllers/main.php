@@ -12,6 +12,7 @@ Class Main extends CI_Controller
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
 		$this->load->helper('date');
+		
 	}
 	public function index()
 	{
@@ -44,7 +45,13 @@ Class Main extends CI_Controller
 		$ans=$this->db->query($query);
 		$data['year']=$year;
 		$data['project']=$ans->result();
-		$this->load->view('template/top');
+		$data['sendingmeta']=TRUE;
+		$data['ogtitle']="HOME|K!14 Projects";
+		$data['ogtype']="article";
+		$data['ogurl']="http://projects.kurukshetra.org.in";
+		$data['ogimg']=base_url()."assets/images/1.jpg";
+		$data['ogdesc']='The gallery of kurukshetra projects';
+		$this->load->view('template/top',$data);
 		$this->load->view('fullview',$data);
 		$this->load->view('template/bottom');
 	}
@@ -54,17 +61,23 @@ Class Main extends CI_Controller
 			redirect('projects');
 		else
 		{
+
 		$query='SELECT * from contents where id='.$id.'';
 		$ans=$this->db->query($query);
 		$data['full']=$ans->result();
 		$this->load->library('pagination');
-
+		$data['sendingmeta']=TRUE;
+		$data['ogtitle']="HOME|K!14 Projects";
+		$data['ogtype']="article";
+		$data['ogurl']="http://projects.kurukshetra.org.in";
+		$data['ogimg']=base_url()."assets/images/1.jpg";
+		$data['ogdesc']='The gallery of kurukshetra projects';
 		$config['base_url'] = base_url().'show';
 		$config['total_rows'] =$ans->num_rows();
 		$config['per_page'] = 5; 
 		$this->pagination->initialize($config);
 		$data['links'] =$this->pagination->create_links();
-		$this->load->view('template/top');
+		$this->load->view('template/top',$data);
 		$this->load->view('details',$data);
 		$this->load->view('template/bottom');
 
@@ -125,6 +138,7 @@ Class Main extends CI_Controller
 		$data['closing']=$this->input->post('closing');
 		$data['edited_by']=$this->tank_auth->get_username();
 		$data['edited_at']=unix_to_human(time());
+		//echo $data['kickoff'];
 		if($this->db->insert('contents',$data))
 			{
 				$tostring='projects/'.$data['year'];
