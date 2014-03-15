@@ -1,3 +1,4 @@
+
 <?php
 echo '<h1>Projects '.$year.'</h1>';
 if(sizeof($project)==0)
@@ -9,6 +10,12 @@ foreach ($project as $row) {
 		
 		echo '<div class="row">
             <div class="contanier">
+            <div class="col-md-3 ">
+    <div class="jumbotron">
+       <h3>Highlight of the year</h3>
+        <p>Mention the project here</p>
+</div>
+    </div>
         <div class="col-md-9" style="float:right;">
           <div class="col-lg-7 col-md-7">
                 <a href="#">

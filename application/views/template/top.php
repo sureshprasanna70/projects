@@ -13,10 +13,10 @@
 	<meta property="og:image" content="<?php echo $ogimg;?>" />
     <?}?>
 
-    <link rel="stylesheet" href="https://djyhxgczejc94.cloudfront.net/frameworks/bootstrap/3.0.0/themes/white-plum/bootstrap.min.css">
+    <link rel="stylesheet" href="<?echo base_url();?>assets/css/bootstrap.min.css">
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?echo base_url();?>assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="<?echo base_url();?>assets/js/bootstrap.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href=<?php echo base_url()."assets/css/style.css";?>>
   </head>
   
@@ -76,10 +76,17 @@
             <li>
                 <a href="http://www.kurukshetra.org.in">K !</a>
               </li>
-              
+              <?if($this->tank_auth->is_logged_in()){?>
+              <li><a href="<?echo base_url()?>/change">EDIT</a></li>
+              <?}?>
             </ul>
             </div>
         
     </nav>
-    <?php if(isset($username))?>
-    <h5 style="float:right">Welcome,<?echo $username;?></h5>
+    <div class="row">
+    <?php if(isset($username)){
+      ?>
+    <h5 style="float:right">Welcome,<?echo $username;?><br><a href="<?php echo base_url();?>auth/logout">Logout</a></h5>
+
+    <?}?>
+  </div>

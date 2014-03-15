@@ -1,6 +1,7 @@
-<?if(validation_errors())?>
+<?if(validation_errors()){?>
 
 <div class="alert alert-danger"><?echo validation_errors();?></div>
+<?}?>
 <?php
 foreach ($full as $row) {
 	# code...

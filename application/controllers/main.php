@@ -27,15 +27,10 @@ Class Main extends CI_Controller
 			$data['username']=$this->tank_auth->get_username();
 		}
 		$this->load->view('template/top',$data);
+		$this->load->view('frontpage.php');
 		$this->load->view('template/bottom');
 
-		/*
-		<meta property="og:title" content="Title Here" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.example.com/" />
-<meta property="og:image" content="http://example.com/image.jpg" />
-<meta property="og:description" content="Description Here" />
-		*/
+		
 	}
 	public function contact()
 	{
@@ -74,17 +69,20 @@ Class Main extends CI_Controller
 				$data['title']="Add new";
 				$this->load->view('template/top',$data);
 				$this->load->view('form');
+				$this->load->view('template/bottom');
 			}
 		else
 			{
 				echo $this->tank_auth->is_logged_in();
-				echo "not logged in.Please log in";
+				$data['message']="You are not logged in.Please log in";
 				$data['login_by_username']='TRUE';
 				$data['login_by_email']='TRUE';
 				$data['show_captcha']=FALSE;
 				$data['use_recaptcha']=FALSE;
 				$data['captcha_html']=FALSE;
+				$this->load->view('template/top',$data);
 				$this->load->view('auth/login_form',$data);
+				$this->load->view('template/bottom');
 			}
 	}
 	public function add_to_gal()
@@ -173,7 +171,7 @@ Class Main extends CI_Controller
 		{
 			
 				$query='SELECT * from contents where id='.$id.'';
-				echo $query;
+				
 				$ans=$this->db->query($query);
 			$data['full']=$ans->result();
 			$this->load->view('template/top');
