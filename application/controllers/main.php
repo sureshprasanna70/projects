@@ -156,6 +156,10 @@ Class Main extends CI_Controller
 				$this->load->view('template/bottom');
 
 			}
+			else
+			{
+				redirect('auth/login');
+			}
 	}
 	public function showeditor($id=NULL)
 	{
@@ -178,6 +182,8 @@ Class Main extends CI_Controller
 	}
 	public function edit()
 	{
+		if($this->tank_auth->is_logged_in())
+		{
 		$this->form_validation->set_rules('project_name','Project name','required');
 		$this->form_validation->set_rules('project_desc','Project Desc','required');
 		$this->form_validation->set_rules('year','Project name','required');
@@ -223,4 +229,9 @@ Class Main extends CI_Controller
 
 			}
 	}
+	else
+	{
+		redirect('auth/login');
+	}
+}
 }
