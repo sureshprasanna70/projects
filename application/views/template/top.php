@@ -77,7 +77,7 @@
                 <a href="http://www.kurukshetra.org.in">K !</a>
               </li>
               <?if($this->tank_auth->is_logged_in()){?>
-              <li><a href="<?echo base_url()?>/change">EDIT</a></li>
+              <li><a href="<?echo base_url()?>change">EDIT</a></li>
               <?}?>
             </ul>
             </div>

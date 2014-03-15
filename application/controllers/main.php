@@ -11,6 +11,7 @@ Class Main extends CI_Controller
 		$this->load->library('security');
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
+		$this->load->helper('date');
 	}
 	public function index()
 	{
@@ -35,6 +36,7 @@ Class Main extends CI_Controller
 	public function contact()
 	{
 		echo "contacts";
+		echo unix_to_human(time());
 	}
 	public function projects($year=2007,$id=NULL)
 	{
@@ -55,9 +57,17 @@ Class Main extends CI_Controller
 		$query='SELECT * from contents where id='.$id.'';
 		$ans=$this->db->query($query);
 		$data['full']=$ans->result();
+		$this->load->library('pagination');
+
+		$config['base_url'] = base_url().'show';
+		$config['total_rows'] =$ans->num_rows();
+		$config['per_page'] = 5; 
+		$this->pagination->initialize($config);
+		$data['links'] =$this->pagination->create_links();
 		$this->load->view('template/top');
 		$this->load->view('details',$data);
 		$this->load->view('template/bottom');
+
 		}
 
 	}
@@ -113,6 +123,8 @@ Class Main extends CI_Controller
 		$data['phase2']=$this->input->post('phase2');
 		$data['phase3']=$this->input->post('phase3');
 		$data['closing']=$this->input->post('closing');
+		$data['edited_by']=$this->tank_auth->get_username();
+		$data['edited_at']=unix_to_human(time());
 		if($this->db->insert('contents',$data))
 			{
 				$tostring='projects/'.$data['year'];
@@ -128,27 +140,7 @@ Class Main extends CI_Controller
 
 			}
 		
-		/*
-		$config['upload_path'] = base_url().'assets/image/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '1000';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
-		$data['photoname']=$this->input->post('photo');
-		echo $data['project_name'];
-        echo "Loading libs".$this->load->library('upload', $config);echo base_url().'assets/images/';
-		if ($this->upload->do_upload($data['photoname']))
-		{
-			$error = array('error' => $this->upload->display_errors());
-			echo "<br> Testing values".$this->upload->do_upload($data['photoname']);
-			echo $error['error'];
-		}
-		else
-		{
-			$data = array('upload_data' => $this->upload->data());
-            echo "<br>File path".$data['upload_data']['file_path'][];
-			echo $data['upload_data'];
-		}*/
+		
 	}
 	public function change()
 	{
@@ -156,7 +148,7 @@ Class Main extends CI_Controller
 			{
 				
 				$data['username']=$this->tank_auth->get_username();
-				$query="SELECT id,name from contents";
+				$query="SELECT id,name,edited_by,edited_at from contents";
 				$ans=$this->db->query($query);
 				$data['linki']=$ans->result();
 				$this->load->view('template/top');
@@ -199,6 +191,7 @@ Class Main extends CI_Controller
 		
 		if($this->form_validation->run())
 		{
+			$timezone = 'UP45';
 		$data['name']=$this->input->post('project_name');
 		$data['desc']=$this->input->post('project_desc');
 		$data['tag']=$this->input->post('tag');
@@ -213,6 +206,8 @@ Class Main extends CI_Controller
 		$data['phase2']=$this->input->post('phase2');
 		$data['phase3']=$this->input->post('phase3');
 		$data['closing']=$this->input->post('closing');
+		$data['edited_by']=$this->tank_auth->get_username();
+		$data['edited_at']=unix_to_human(time());
 		if($this->db->update('contents',$data))
 			{
 				$tostring='projects/'.$data['year'];

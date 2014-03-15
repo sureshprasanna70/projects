@@ -34,17 +34,20 @@ echo '    <div class="panel panel-default"></div>
                 </div>
                 <div class="col-md-6">
                 <label>Timeline</team>
-                <h4>KICKOFF</h4>
-                <h4>PHASE 1</h4>
-                <h4>PHASE 2</h4>
-                <h4>PHASE 3</h4>
-                <h4>CLOSING</h4>
+                <h4>KICKOFF  --------->'.$row->kickoff.'</h4>
+                <h4>PHASE 1  --------->'.$row->phase1.'</h4>
+                <h4>PHASE 2  --------->'.$row->phase2.'</h4>
+                <h4>PHASE 3  --------->'.$row->phase3.'</h4>
+                <h4>CLOSING  --------->'.$row->closing.'</h4>
                 </div>
             </div>
 
           
   </div>
   </div>';
+
 }
+
+echo $links;
 }
 ?>
