@@ -6,16 +6,19 @@ if(sizeof($project)==0)
 
 	echo "<h1>Thanks for your interest.<br>We haven't updated yet</h1>";
 }
-foreach ($project as $row) {
-		
-		echo '<div class="row">
+else
+{
+    echo '<div class="row">
             <div class="contanier">
             <div class="col-md-3 ">
     <div class="jumbotron">
        <h3>Highlight of the year</h3>
         <p>Mention the project here</p>
 </div>
-    </div>
+    </div>';
+foreach ($project as $row) {
+		
+		echo '
         <div class="col-md-9" style="float:right;">
           <div class="col-lg-7 col-md-7">
                 <a href="#">
@@ -38,5 +41,5 @@ foreach ($project as $row) {
 <br>';
 
 }
-
+}
 ?>
